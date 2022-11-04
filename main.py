@@ -14,6 +14,8 @@ flight_date_28 = flight_prices.round_28
 
 
 def write_code():
+    """This method sends the necessary data to notifications,
+    Google Sheets and the data.json file to be updated accordingly"""
     iata_code = both_codes[0]
     icao_code = both_codes[1]
     best_deal = flight_prices.search_flight(departure=DEPARTURE_AERODROME, destination=iata_code)
