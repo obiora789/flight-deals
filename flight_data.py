@@ -14,6 +14,7 @@ class FlightData:
         self.goflightlabs_endpoint = os.environ.get("GOFLIGHTLABS_ENDPOINT")
 
     def get_codes(self, city):
+        """This method performs searches for flight data from the location API and sends the result to main.py"""
         icao_code = ""
         data = {
             "term": city,
