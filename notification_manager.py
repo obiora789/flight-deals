@@ -15,6 +15,7 @@ class NotificationManager:
         self.from_phone = os.environ.get("FROM_PHONE")
 
     def send_notification(self, deal_price, dept_city, iata_dep, dest_city, iata_dest, date_7, date_28):
+        """This method structures the SMS message to be sent to the user"""
         client = Client(self.account_sid, self.auth_token)
         message = client.messages.create(
             body=f"Low price alert! Only ₦{deal_price} to fly from {dept_city}({iata_dep}) to "
