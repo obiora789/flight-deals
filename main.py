@@ -3,8 +3,8 @@ from flight_data import FlightData
 from data_manager import DataManager
 from notification_manager import NotificationManager
 
-DEPARTURE_AERODROME = "LOS"
-CITY_OF_DEPARTURE = "Lagos"
+DEPARTURE_AERODROME = "LOS" # You can modify this line to set your airport of departure
+CITY_OF_DEPARTURE = "Lagos" # You can modify this line to set your city of departure
 flight_prices = FlightSearch()
 get_iata = FlightData()
 data_mgr = DataManager()
