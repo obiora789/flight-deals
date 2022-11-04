@@ -8,6 +8,7 @@ dotenv.load_dotenv(dotenv_file)
 
 
 class DataManager:
+    # This class manages all data to and from Google sheets as well as updates its local database
     def __init__(self):
         self.sheety_endpoint = os.environ.get("SHEETY_ENDPOINT")
         self.sheety_auth = {"Authorization": "Bearer " + os.getenv("SHEETY_AUTH")}
@@ -15,11 +16,13 @@ class DataManager:
         self.data_found = None
 
     def read_google_sheet(self):
+        """This method reads from the Google sheet to get data"""
         sheety_response = requests.get(url=self.sheety_endpoint, headers=self.sheety_auth)
         sheety_response.raise_for_status()
         return sheety_response.json()
 
     def write_google_sheet(self, sheety_list):
+        """This method updates the Google sheet with flight details """
         price_upload = {}
         items = [{"iataCode": sheet_dict["iataCode"], "icaoCode": sheet_dict["icaoCode"],
                   "lowestPrice": f"₦{sheet_dict['lowestPrice']}", "id": sheet_dict["id"]}
@@ -32,6 +35,8 @@ class DataManager:
             sheety_write.raise_for_status()
 
     def search_local(self, city: str):
+        """This method performs a local search through the data.json. It only searches the flight API for
+        details when the destination does not exist in the json file"""
         try:
             with open("data.json", mode="r") as local_file:
                 local_data = json.load(local_file)
@@ -48,6 +53,7 @@ class DataManager:
                     self.data_found = False
 
     def write_to_file(self, data):
+        """This method manages the data.json file"""
         try:
             with open("data.json", mode="r") as read_file:
                 read_data = json.load(read_file)
